@@ -1,0 +1,49 @@
+/* ── 1440px ── */
+@media (max-width: 1440px) {
+  .outer_cal { max-width: 28%; }
+}
+
+/* ── 1024px ── */
+@media (max-width: 1024px) {
+  .outer_cal { max-width: 40%; }
+}
+
+/* ── 768px (Tablet) ── */
+@media (max-width: 768px) {
+  .outer_cal { max-width: 60%; }
+  .btn { height: 65px; font-size: 26px; }
+  .result { font-size: 44px; }
+  .expression { font-size: 22px; }
+}
+
+/* ── 425px ── */
+@media (max-width: 425px) {
+  .outer_cal { max-width: 92%; margin: 20px auto; }
+  .btn { height: 60px; font-size: 24px; }
+  .result { font-size: 40px; }
+  .expression { font-size: 20px; }
+  .buttons { gap: 10px; }
+}
+
+/* ── 375px ── */
+@media (max-width: 375px) {
+  .outer_cal { max-width: 95%; margin: 15px auto; }
+  .inner_cal { padding: 15px; gap: 25px; }
+  .btn { height: 55px; font-size: 22px; border-radius: 14px; }
+  .result { font-size: 36px; }
+  .expression { font-size: 18px; }
+  .buttons { gap: 8px; }
+  .result_show { min-height: 150px; padding: 16px 14px; }
+}
+
+/* ── 320px ── */
+@media (max-width: 320px) {
+  .outer_cal { max-width: 98%; margin: 10px auto; border-radius: 30px; }
+  .inner_cal { padding: 12px; gap: 20px; border-radius: 28px; }
+  .btn { height: 50px; font-size: 20px; border-radius: 12px; }
+  .result { font-size: 32px; }
+  .expression { font-size: 16px; }
+  .buttons { gap: 7px; }
+  .result_show { min-height: 130px; padding: 14px 12px; }
+  .zero_btn { padding-left: 18px; }
+}

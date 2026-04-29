@@ -1,0 +1,151 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #1a202e;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+ul {
+  list-style: none;
+}
+
+.outer_cal {
+  max-width: 26%;
+  margin: 50px auto;
+  background: linear-gradient(145deg, #0f1a2b, #0a1322);
+  border-radius: 50px;
+  padding: 5px;
+  box-shadow:
+    0 0 25px rgba(0, 0, 0, 0.8),
+    0 0 60px rgba(0, 150, 255, 0.1);
+  border: 5px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    10px 10px 30px rgba(0, 0, 0, 0.9),
+    -10px -10px 30px rgba(255, 255, 255, 0.05);
+}
+.inner_cal {
+  display: flex;
+  flex-direction: column;
+  background-color: #1a202e;
+  padding: 20px;
+  border-radius: 50px;
+  gap: 40px;
+}
+.result_show {
+  max-width: 100%;
+  background: linear-gradient(160deg, #1e2436, #161b28);
+  border-radius: 24px;
+  min-height: 180px;
+  padding: 24px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 10px;
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.6),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+    0 1px 0 rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.expression {
+  color: #6b7280;
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
+.result {
+  color: #ffffff;
+  font-size: 52px;
+  font-weight: 300;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  word-break: break-all;
+  text-align: right;
+}
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* ── BASE BUTTON ── */
+.btn {
+  padding: 0;
+  height: 72px;
+  font-size: 22px;
+  font-weight: 500;
+  border: none;
+  border-radius: 18px;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  font-size: 30px;
+  font-weight: 500;
+  background: linear-gradient(145deg, #252c3d, #1a2030);
+  box-shadow:
+    5px 5px 12px rgba(0, 0, 0, 0.7),
+    -2px -2px 6px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+
+  transition: all 0.1s ease;
+}
+
+.btn:active {
+  box-shadow:
+    2px 2px 6px rgba(0, 0, 0, 0.7),
+    -1px -1px 3px rgba(255, 255, 255, 0.03),
+    inset 0 2px 6px rgba(0, 0, 0, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+  transform: translateY(1px);
+}
+
+.operator_btn {
+  background: linear-gradient(145deg, #f5832e, #d4611a) !important;
+  box-shadow:
+    5px 5px 12px rgba(0, 0, 0, 0.6),
+    -2px -2px 6px rgba(255, 160, 60, 0.15),
+    inset 0 1px 0 rgba(255, 200, 120, 0.3),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.25) !important;
+}
+
+.operator_btn:active {
+  background: linear-gradient(145deg, #d4611a, #b85010) !important;
+  box-shadow:
+    2px 2px 6px rgba(0, 0, 0, 0.6),
+    inset 0 2px 6px rgba(0, 0, 0, 0.4),
+    inset 0 -1px 0 rgba(255, 150, 60, 0.1) !important;
+}
+
+/* ── AC orange text ── */
+#clear {
+  color: #ef7223;
+}
+
+/* ── ZERO BUTTON (spans 2 cols) ── */
+.zero_btn {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 26px;
+  align-items: center;
+}
