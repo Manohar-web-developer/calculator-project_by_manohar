@@ -64,39 +64,41 @@ document
   .addEventListener("click", () => setOperator("%"));
 
 function setOperator(op) {
-  previousInput = currentInput;
-  operator = op;
-  expression.textContent = previousInput + " " + operator;
-  currentInput = "";
+ if (currentInput === "") {
+        operator = op;
+        expression.textContent = previousInput + " " + operator;
+        return;
+    }
+
+
+    if (previousInput !== "" && currentInput !== "") {
+        const answer = calculate();    
+        if (answer === null) return;
+        result.textContent = answer;
+        currentInput = String(answer);
+        previousInput = "";
+        operator = "";
+    }
+    previousInput = currentInput;
+    operator = op;
+    expression.textContent = previousInput + " " + operator;
+    currentInput = "";
+    justCalculated = false;
 }
 
+
 document.getElementById("equal").addEventListener("click", () => {
-  const a = parseFloat(previousInput);
-  const b = parseFloat(currentInput);
-  let answer;
+    if (previousInput === "" || currentInput === "" || operator === "") return;
 
-  if (operator === "+") {
-    answer = a + b;
-  } else if (operator === "-") {
-    answer = a - b;
-  } else if (operator === "*") {
-    answer = a * b;
-  } else if (operator === "/") {
-    if(b === 0){
-        return
-    }
-    answer = a / b;
-  } else if (operator === "%") {
-    answer = a % b;
-  }
+    const answer = calculate();  // function call karo
+    if (answer === null) return;
 
-  result.textContent = answer;
-  expression.textContent = previousInput + " " + operator + " " + currentInput;
-  justCalculated = true;
-
-  currentInput = String(answer);
-  previousInput = "";
-  operator = "";
+    result.textContent = answer;
+    expression.textContent = previousInput + " " + operator + " " + currentInput;
+    currentInput = String(answer);
+    previousInput = "";
+    operator = "";
+    justCalculated = true;
 });
 document.getElementById("clear").addEventListener("click", () => {
   expression.textContent = "";
@@ -119,3 +121,20 @@ document.getElementById("decimal_point").addEventListener("click", () => {
     currentInput +="."
     result.textContent = currentInput
 });
+
+function calculate() {
+    const a = parseFloat(previousInput);
+    const b = parseFloat(currentInput);
+    let answer;
+
+    if (operator === "+") answer = a + b;
+    else if (operator === "-") answer = a - b;
+    else if (operator === "*") answer = a * b;
+    else if (operator === "/") {
+        if (b === 0) { result.textContent = "Error"; return null; }
+        answer = a / b;
+    }
+    else if (operator === "%") answer = a % b;
+
+    return answer;
+}
