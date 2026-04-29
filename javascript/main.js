@@ -38,11 +38,24 @@ document
   .getElementById("zero")
   .addEventListener("click", () => appendNumber("0"));
 
+document.addEventListener("keydown", (e) => {
+  if (e.key === "1") appendNumber("1");
+  if (e.key === "2") appendNumber("2");
+  if (e.key === "3") appendNumber("3");
+  if (e.key === "4") appendNumber("4");
+  if (e.key === "5") appendNumber("5");
+  if (e.key === "6") appendNumber("6");
+  if (e.key === "7") appendNumber("7");
+  if (e.key === "8") appendNumber("8");
+  if (e.key === "9") appendNumber("9");
+  if (e.key === "0") appendNumber("0");
+});
+
 function appendNumber(num) {
-    if(justCalculated){
-        currentInput ="";
-        justCalculated = false
-    }
+  if (justCalculated) {
+    currentInput = "";
+    justCalculated = false;
+  }
   currentInput += num;
   result.textContent = currentInput;
 }
@@ -59,82 +72,129 @@ document
 document
   .getElementById("divide")
   .addEventListener("click", () => setOperator("/"));
-  document
+document
   .getElementById("percentage")
   .addEventListener("click", () => setOperator("%"));
 
+document.addEventListener("keydown", (e) => {
+  if (e.key === "+") setOperator("+");
+  if (e.key === "-") setOperator("-");
+  if (e.key === "*") setOperator("*");
+  if (e.key === "/") setOperator("/");
+  if (e.key === "%") setOperator("%");
+});
+
 function setOperator(op) {
- if (currentInput === "") {
-        operator = op;
-        expression.textContent = previousInput + " " + operator;
-        return;
-    }
-
-
-    if (previousInput !== "" && currentInput !== "") {
-        const answer = calculate();    
-        if (answer === null) return;
-        result.textContent = answer;
-        currentInput = String(answer);
-        previousInput = "";
-        operator = "";
-    }
-    previousInput = currentInput;
+  if (currentInput === "") {
     operator = op;
     expression.textContent = previousInput + " " + operator;
-    currentInput = "";
-    justCalculated = false;
-}
+    return;
+  }
 
-
-document.getElementById("equal").addEventListener("click", () => {
-    if (previousInput === "" || currentInput === "" || operator === "") return;
-
-    const answer = calculate();  // function call karo
+  if (previousInput !== "" && currentInput !== "") {
+    const answer = calculate();
     if (answer === null) return;
-
     result.textContent = answer;
-    expression.textContent = previousInput + " " + operator + " " + currentInput;
     currentInput = String(answer);
     previousInput = "";
     operator = "";
-    justCalculated = true;
+  }
+  previousInput = currentInput;
+  operator = op;
+  expression.textContent = previousInput + " " + operator;
+  currentInput = "";
+  justCalculated = false;
+}
+
+document.getElementById("equal").addEventListener("click", () => {
+  performCalculation();
 });
-document.getElementById("clear").addEventListener("click", () => {
+addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === "=") {
+    performCalculation();
+  }
+});
+function performCalculation() {
+  if (previousInput === "" || currentInput === "" || operator === "") return;
+
+  const answer = calculate();
+  if (answer === null) return;
+
+  result.textContent = answer;
+  expression.textContent = previousInput + " " + operator + " " + currentInput;
+  currentInput = String(answer);
+  previousInput = "";
+  operator = "";
+  justCalculated = true;
+}
+document.getElementById("clear").addEventListener("click", clearAll);
+addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    clearAll();
+  }
+});
+function clearAll() {
   expression.textContent = "";
   result.textContent = "";
   operator = "";
   currentInput = "";
-  previousInput = ""
+  previousInput = "";
   justCalculated = false;
+}
+
+document
+  .getElementById("backspace")
+  .addEventListener("click", removeLastCharacter);
+addEventListener("keydown", (e) => {
+  if (e.key === "Backspace") {
+    removeLastCharacter();
+  }
 });
 
-document.getElementById("backspace").addEventListener("click", () => {
-   currentInput = currentInput.slice(0, -1);
-   result.textContent = currentInput
-});
+function removeLastCharacter() {
+  currentInput = currentInput.slice(0, -1);
+  result.textContent = currentInput;
+}
 
 document.getElementById("decimal_point").addEventListener("click", () => {
-    if(currentInput.includes(".")){
-        return
-    }
-    currentInput +="."
-    result.textContent = currentInput
+  appendDecimal();
 });
+addEventListener("keydown", (e) => {
+    if (e.key === ".") {
+        appendDecimal();
+    }
+});
+function appendDecimal() {
+    if (currentInput.includes(".")) {
+    return;
+  }
+  currentInput += ".";
+  result.textContent = currentInput;
+}
 
 function calculate() {
-    const a = parseFloat(previousInput);
-    const b = parseFloat(currentInput);
-    let answer;
+  const a = parseFloat(previousInput);
+  const b = parseFloat(currentInput);
+  let answer;
 
-    if (operator === "+") answer = a + b;
-    else if (operator === "-") answer = a - b;
-    else if (operator === "*") answer = a * b;
-    else if (operator === "/") {
-        if (b === 0) { result.textContent = "Error"; return null; }
-        answer = a / b;
+  if (operator === "+") answer = a + b;
+  else if (operator === "-") answer = a - b;
+  else if (operator === "*") answer = a * b;
+  else if (operator === "/") {
+    if (b === 0) {
+      result.textContent = "Error";
+      return null;
     }
-    else if (operator === "%") answer = a % b;
+    answer = a / b;
+  } else if (operator === "%") answer = a % b;
 
-    return answer;
+  return answer;
 }
+document.getElementById("equal").addEventListener("dblclick", () => {
+  currentInput = currentInput * 2;
+  result.textContent = currentInput;
+});
+
+document.addEventListener("keydown", (e) => {
+  console.log(e.key);
+});
